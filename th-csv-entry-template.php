@@ -1,50 +1,34 @@
-<?php
 
-if (isset($_POST['import'])) {
+<div class="wrap">
+    <br/><h1>CSV Entry</h1>
 
-    /* if (is_uploaded_file($_FILES['upload_csv']['tmp_name'])) {
+    <div id="response"
+        class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>">
+        <?php if(!empty($message)) { echo $message; } ?>
+        </div>
+    <div class="outer-scontainer">
+        <div class="row">
 
-            echo "uploaded successfully.";
-    } */
- echo "fasdfas";
- print_r($_FILES);
-	// $fileContent = file_get_contents($_FILES['upload_csv']['tmp_name']);
+            <form class="form-horizontal" 
+				action="<?php echo esc_url( admin_url('admin-post.php') ); ?>"
+				method="post"
+                name="frmCSVImport" id="frmCSVImport"
+                enctype="multipart/form-data">
+                <div class="input-row">
+                    <label class="col-md-4 control-label">Choose CSV File</label> 
+					
+					<input type="file" name="upload_csv" id="file" accept=".csv">
+                    <button type="submit" id="submit" name="import" value="import" class="btn-submit">Import</button>
+                    <br />
+					 <input type="hidden" name="action" value="import_csv_shipment">
+                </div>
 
-	// print_r( $fileContent);
-    //Import uploaded file to Database
-    $handle = fopen($_FILES['upload_csv']['tmp_name'], "r");
-	
-     while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
-		 echo "<pre>";
-		 print_r($data);
-		  echo "</pre>";
-      /*  $wpdb->insert("csv", array(
-                "ULC" => $data[0],
-                "TI" => $data[1],
-                "ETA" => $data[2],
-                "ETD" => $data[3],
-                "SN" => $data[4],
-                "SOVO" => $data[5],
-                "LI" => $data[6],
-                "CCD" => $data[7],
-                "RCD" => $data[8],
-                "O" => $data[9],
-                "OD" => $data[10],
-                "SOC" => $data[11],
-                "SOVI" => $data[12],
-                "ERCD" => $data[13],
-                "IAD" => $data[14],
-                "ISSD" => $data[15],
-                "VT" => $data[16],
-                "AAD" => $data[17],
-                "ADDD" => $data[18],
-                "VC" => $data[19]
-             ));*/
-    }  
+            </form>
 
-    fclose($handle);
-} 
-?>
+        </div>
+</div>
+
+
 <style>
     .update-nag, .updated, .error, .is-dismissible {
         display: none;
@@ -114,30 +98,3 @@ div#response.display-block {
     display: block;
 }
 </style>
-
-<div class="wrap">
-    <br/><h1>CSV Entry</h1>
-
-    <div id="response"
-        class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>">
-        <?php if(!empty($message)) { echo $message; } ?>
-        </div>
-    <div class="outer-scontainer">
-        <div class="row">
-
-            <form class="form-horizontal" action="" method="post"
-                name="frmCSVImport" id="frmCSVImport"
-                enctype="multipart/form-data">
-                <div class="input-row">
-                    <label class="col-md-4 control-label">Choose CSV File</label> 
-					
-					<input type="file" name="upload_csv" id="file" accept=".csv">
-                    <button type="submit" id="submit" name="import" value="import" class="btn-submit">Import</button>
-                    <br />
-
-                </div>
-
-            </form>
-
-        </div>
-</div>

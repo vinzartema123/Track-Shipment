@@ -1,6 +1,8 @@
 
 <?php 
 	//echo $id;
+	
+	print_r( get_post_meta( $id, '_payment_date' ,true));
 ?>
 <table class="wpcargo form-table">
 				<tbody>
