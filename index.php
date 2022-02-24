@@ -172,24 +172,35 @@
 					 print_r($my_post);
 					// Insert the post into the database
 					
-					// if(post_exists( 'dvp5b6tsjhil9qang247' ))
-						
-					/* $post_id =  wp_insert_post( $my_post );
-					  echo $post_id; */
-					  
-					  /* $post_update = array(
+					
+					 $post_id = null;
+					if($id = post_exists(wp_strip_all_tags($random_char) )){
+						$post_id = $id;
+					}
+					else{
+						$post_id =  wp_insert_post( $my_post );
+					}
+					
+					
+					/* echo $post_id."<br>";
+					echo "JCP".str_pad(12346435412307894656345, 10, '0', STR_PAD_LEFT);
+					 */
+					
+					$post_update = array(
 						'ID'         => $post_id,
-						'post_title' => "JCP".$post_id
+						'post_title' => "JCP".str_pad($post_id, 10, '0', STR_PAD_LEFT)
 					  );
 
-					  wp_update_post( $post_update ); 
-					   */
+					wp_update_post( $post_update ); 
+					
+					
+					   
 					//update_post_meta( $post_id, 'times', '1' );
 				  // echo $row;
 				  unset($line);
 				  flush();
 				  ob_flush(); 
-		} while (($line = fgetcsv($handle)) !== false && $row < 1);
+		} while (($line = fgetcsv($handle)) !== false && $row < 20);
 		
 			/* while () {
 			} */
